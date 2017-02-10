@@ -2,7 +2,7 @@
 
 namespace \cfe-printer\Pdf;
 
-class CfePrintGenerator{
+class CfePdfGenerator{
 
     function __construct()
     {
