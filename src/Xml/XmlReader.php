@@ -2,11 +2,13 @@
 
 namespace \CfePrinter\Xml;
 
-class XmlReader{
+use ZendPdf;
+
+class XmlReader{    
 
     function __construct()
     {
-
+        
     }
 }
 
