@@ -1,0 +1,29 @@
+{
+    "name": "amosassis/cfe-print",
+    "type": "library",
+    "description": "Biblioteca para impressao de CF-e SAT",
+    "version": "0.0.1",
+    "keywords": ["cfe-print", "impressao cf-e", "impressao sat"],
+    "license": ["GPL-3.0+", "LGPL-3.0+"],
+    "authors": [
+        {
+            "name": "Amos de Assis",
+            "email": "amos@am10.com.br",
+            "homepage": "http://www.am10.com.br",
+            "role": "Developer"
+        }
+    ],    
+    "require-dev": {
+        "phpunit/phpunit": "4.*"      
+    },
+    "require": {
+        "endroid/qrcode": "1.9.*",
+        "zendframework/zendpdf": "2.0.*",
+        "zendframework/zendxml": "1.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "cfe-print\\": "src/"            
+        }
+    }
+}
