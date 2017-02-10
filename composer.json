@@ -1,5 +1,5 @@
 {
-    "name": "amosassis/cfe-print",
+    "name": "amosassis/cfe-printer",
     "type": "library",
     "description": "Biblioteca para impressao de CF-e SAT",
     "version": "0.0.1",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "cfe-print\\": "src/"            
+            "cfe-printer\\": "src/"            
         }
     }
 }
