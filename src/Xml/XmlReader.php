@@ -1,6 +1,6 @@
 <?php
 
-namespace \cfe-printer\Xml;
+namespace \CfePrinter\Xml;
 
 class XmlReader{
 
