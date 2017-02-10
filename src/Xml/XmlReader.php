@@ -1,6 +1,6 @@
 <?php
 
-namespace \CfePrinter\Xml;
+namespace CfePrinter\Xml;
 
 use ZendPdf;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace \CfePrinter\Pdf;
+namespace CfePrinter\Pdf;
 
 class CfePdfGenerator{
 

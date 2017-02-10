@@ -1,7 +1,9 @@
 <?php
 
+namespace CfePrinter\Tests;
 
-class CfePdfGeneratorTests extends PHPUnit_Framework_TestCase{
+class CfePdfGeneratorTests extends \PHPUnit_Framework_TestCase
+{
 
     function testCfePdfGeneratorInstantiation()
     {
@@ -9,4 +11,3 @@ class CfePdfGeneratorTests extends PHPUnit_Framework_TestCase{
         $this->assertInstanceOf('CfePdfGenerator', $pdfPrinter);
     }
 }
-
