@@ -1,4 +1,4 @@
-#PHP-SPED
+#CFE-PRINTER
 
 Biblioteca para impressao de CF-e SAT
 
