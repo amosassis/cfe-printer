@@ -67,7 +67,7 @@ class CfePdfGenerator
     function setProducts()
     {
         $products = $this->xml->getDet();
-        $this->pdf->SetFont($this->font, '', 7.8);
+        $this->pdf->SetFont($this->font, '', 7);
         $this->pdf->Cell($this->pageWidth, 5, '#|COD|DESC|QTD|UN|VL UN R$|VL TR R$|VL ITEM R$');
         $this->setDividerLine();
         $index = 1;
@@ -77,8 +77,8 @@ class CfePdfGenerator
             $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round($prod->qCom, 3);
             $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 27);
             $item = str_pad($index, 3, '0', STR_PAD_LEFT);
-            $this->pdf->Cell(55, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
-            $this->pdf->Cell(23, 3.5, number_format((float)$prod->vItem, 2, ',', '.'), 0, 0, 'R');
+            $this->pdf->Cell(50, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
+            $this->pdf->Cell(20, 3.5, number_format((float)$prod->vItem, 2, ',', '.'), 0, 0, 'R');
             $this->pdf->Ln();
             $index++;
         }
@@ -89,8 +89,8 @@ class CfePdfGenerator
     {
         $total = $this->xml->getTotal();
         $this->pdf->SetFont($this->font, 'B', 12);
-        $this->pdf->Cell(50, 5, 'TOTAL R$');
-        $this->pdf->Cell(28, 5, number_format((float)$total->vCFe, 2, ',', '.'), 0, 0, 'R');
+        $this->pdf->Cell(45, 5, 'TOTAL R$');
+        $this->pdf->Cell(25, 5, number_format((float)$total->vCFe, 2, ',', '.'), 0, 0, 'R');
         $this->pdf->Ln();
     }
 
@@ -99,14 +99,14 @@ class CfePdfGenerator
         $payments = $this->xml->getPgto();
         $this->pdf->SetFont($this->font, '', 8);
         foreach ($payments as $payment) {
-            $this->pdf->Cell(50, 5, PaymentTypes::byCode($payment->MP->cMP));
-            $this->pdf->Cell(28, 5, number_format((float)$payment->MP->vMP, 2, ',', '.'), 0, 0, 'R');
+            $this->pdf->Cell(45, 5, PaymentTypes::byCode($payment->MP->cMP));
+            $this->pdf->Cell(25, 5, number_format((float)$payment->MP->vMP, 2, ',', '.'), 0, 0, 'R');
             $this->pdf->Ln();
         }
         if ($payments->vTroco > 0) {
             $this->pdf->SetFont($this->font, '', 10);
-            $this->pdf->Cell(50, 5, 'Troco R$');
-            $this->pdf->Cell(28, 5, number_format((float)$payments->vTroco, 2, ',', '.'), 0, 0, 'R');
+            $this->pdf->Cell(45, 5, 'Troco R$');
+            $this->pdf->Cell(25, 5, number_format((float)$payments->vTroco, 2, ',', '.'), 0, 0, 'R');
             $this->pdf->Ln();
         }
     }
@@ -120,8 +120,8 @@ class CfePdfGenerator
         $this->pdf->Cell($this->pageWidth, 5, $infoAdd->infCpl);
         $this->pdf->Ln();
         $total = $this->xml->getTotal();
-        $this->pdf->MultiCell(60, 5, 'Valor aproximado dos tributos deste cupom (Conforme Lei Fed. 12.741/2012)', 0, 'L', 0, 0);
-        $this->pdf->MultiCell(18, 5, number_format((float)$total->vCFeLei12741, 2, ',', '.'), 0, 'R');
+        $this->pdf->MultiCell(45, 5, 'Valor aproximado dos tributos deste cupom (Conforme Lei Fed. 12.741/2012)', 0, 'L', 0, 0);
+        $this->pdf->MultiCell(25, 5, number_format((float)$total->vCFeLei12741, 2, ',', '.'), 0, 'R');
         $this->pdf->Ln();
     }
 
@@ -129,7 +129,7 @@ class CfePdfGenerator
     {
         $id = $this->xml->getId();
         $this->pdf->Ln();
-        $this->pdf->SetFont($this->font, '', 7.2);
+        $this->pdf->SetFont($this->font, '', 6.5);
         $formt = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 18, 4), substr($id, 20, 4), substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
         $this->pdf->Cell($this->pageWidth, 5, $formt, 0, 'C');
     }
@@ -154,9 +154,9 @@ class CfePdfGenerator
             'stretchtext' => 4
         );
         $this->pdf->Ln();
-        $this->pdf->write1DBarcode(substr($id, 0, 20), 'C128A', 15, '', 50, 15, 0.4, $style, 'C');
-        $this->pdf->Ln(15);
-        $this->pdf->write1DBarcode(substr($id, 20, 20), 'C128A', 15, '', 50, 15, 0.4, $style, 'C');
+        $this->pdf->write1DBarcode(substr($id, 0, 20), 'C128A', 10, '', 50, 10, 0.4, $style, 'C');
+        $this->pdf->Ln(10);
+        $this->pdf->write1DBarcode(substr($id, 20, 20), 'C128A', 10, '', 50, 10, 0.4, $style, 'C');
         $this->pdf->Ln();
     }
 
@@ -173,7 +173,7 @@ class CfePdfGenerator
             'module_width' => 1, // width of a single module in points
             'module_height' => 1 // height of a single module in points
         );
-        $this->pdf->SetY($this->pdf->GetY() + 13);
+        $this->pdf->SetY($this->pdf->GetY() + 10);
         $this->pdf->write2DBarcode($ide->assinaturaQRCODE, 'QRCODE,H', 2, $this->pdf->GetY(), 37, 37, $style, 'C');
     }
 
@@ -182,24 +182,25 @@ class CfePdfGenerator
         $ide = $this->xml->getIde();
         $dest = $this->xml->getDest();
         $yValue = $this->pdf->GetY();
-        $this->pdf->Text(45, $yValue, 'Consumidor');
+        $xValue = 40;
+        $this->pdf->Text($xValue, $yValue, 'Consumidor');
         $yValue += 3.5;
-        $this->pdf->Text(45, $yValue, $dest->xNome);
+        $this->pdf->Text($xValue, $yValue, $dest->xNome);
         $cpf = $dest->CPF ? $dest->CPF : '';
         $cnpj = $dest->CNPJ ? $dest->CNPJ : '';
         $numDoc = $cpf ? $cpf : $cnpj;
         if ($numDoc) {
             $yValue += 3.5;
-            $this->pdf->Text(45, $yValue, "Doc: {$numDoc}");
+            $this->pdf->Text($xValue, $yValue, "Doc: {$numDoc}");
         }
         $yValue += 3.5;
-        $this->pdf->Text(45, $yValue, "Nº Serie SAT: {$ide->nserieSAT}");
+        $this->pdf->Text($xValue, $yValue, "Nº Serie SAT: {$ide->nserieSAT}");
         $yValue += 3.5;
         $dtEmi = \DateTime::createFromFormat("Ymd", $ide->dEmi);
         $hEmi = \DateTime::createFromFormat("His", $ide->hEmi);
-        $this->pdf->Text(45, $yValue, "{$dtEmi->format("d/m/Y")} {$hEmi->format("H:i:s")}");
+        $this->pdf->Text($xValue, $yValue, "{$dtEmi->format("d/m/Y")} {$hEmi->format("H:i:s")}");
         $this->pdf->SetY($this->pdf->GetY() + 6);
-        $this->pdf->Cell(40, 5, '');
+        $this->pdf->Cell(38, 5, '');
         $this->pdf->MultiCell(35, 5, 'Consulte o QRCode pelo aplicativo "De olho na nota", disponível na AppStore (Apple) e PlayStore (Android)', 0, 'C', 0);
     }
 
