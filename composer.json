@@ -18,8 +18,7 @@
     },
     "require": {
         "endroid/qrcode": "1.9.*",
-        "zendframework/zendpdf": "2.0.*",
-        "zendframework/zendxml": "1.0.*"
+        "tecnickcom/tcpdf": "^6.2"        
     },
     "autoload": {
         "psr-4": {
