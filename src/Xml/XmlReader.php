@@ -11,6 +11,11 @@ class XmlReader
         $this->xml = simplexml_load_string($xml);
     }
 
+    function getIdCanc()
+    {        
+        return isset($this->xml->infCFe[0]->attributes()['chCanc']) ? substr($this->xml->infCFe[0]->attributes()['chCanc'],3) : '';
+    }
+
     function getId()
     {
         return substr($this->xml->infCFe[0]->attributes()['Id'], 3);
