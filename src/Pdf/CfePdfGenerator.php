@@ -46,9 +46,13 @@ class CfePdfGenerator
         }
     }
 
-    function setCancelledCoupom(XmlReader $xml)
+    function setCancelCoupon(XmlReader $xml)
     {
-        $this->idCanc = $xml->getIdCanc();
+        //Check cancelled coupon id
+        if ($xml->getIdCanc() !== $this->id){
+            throw new \Exception('A chave chCanc informada no XML de cancelamento deve ser identica a chave do documento cancelado');
+        }
+        $this->idCanc = $xml->getId();
         $this->ideCanc = $xml->getIde();
         $this->createPDF();
     }
@@ -145,7 +149,7 @@ class CfePdfGenerator
         }
     }
 
-    function setCancelledCoupomData()
+    function setCancelledCouponData()
     {
         $this->pdf->SetFont($this->font, 'B', 7);
         $this->pdf->MultiCell($this->pageWidth, 5, "DADOS DO CUPOM FISCAL ELETRÔNICO CANCELADO", 0, 'C', 0);
@@ -167,11 +171,11 @@ class CfePdfGenerator
         $this->pdf->MultiCell($this->pageWidth, 5, "{$dtEmi->format("d/m/Y")} {$hEmi->format("H:i:s")}", 0, 'C');
         $this->setCFeId($this->id);
         $this->setBarcode($this->id);
-        $this->setQRCodeCoupom(18);
+        $this->setQRCodeCoupon(18);
         $this->setDividerLine();
     }
 
-    function setCancelCoupomData()
+    function setCancelCouponData()
     {
         $this->pdf->SetFont($this->font, '', 7);
         $this->pdf->MultiCell($this->pageWidth, 5, "DADOS DO CUPOM FISCAL ELETRÔNICO DE CANCELAMENTO", 0, 'C', 0);
@@ -185,7 +189,7 @@ class CfePdfGenerator
         $this->pdf->MultiCell($this->pageWidth, 5, "{$dtEmi->format("d/m/Y")} {$hEmi->format("H:i:s")}", 0, 'C');
         $this->setCFeId($this->idCanc);
         $this->setBarcode($this->idCanc);
-        $this->setQRCodeCancelCoupom(18);
+        $this->setQRCodeCancelCoupon(18);
         $this->setDividerLine();
         $this->pdf->MultiCell($this->pageWidth, 5, 'Consulte o QR Code pelo aplicativo "De olho na nota" disponível na AppStore (Apple) e PlayStore(Android)', 0, 'C', 0);
     }
@@ -233,13 +237,13 @@ class CfePdfGenerator
         $this->pdf->Ln();
     }
 
-    function setQRCodeCoupom($xPosition = 2)
+    function setQRCodeCoupon($xPosition = 2)
     {
         $qrCodeString = "{$this->id}|{$this->ide->dEmi}{$this->ide->hEmi}|{$this->total->vCFe}|{$this->getNumDoc()}|{$this->ide->assinaturaQRCODE}";
         $this->setQRCode($qrCodeString, $xPosition, $this->pdf->GetY() + 10);
     }
 
-    function setQRCodeCancelCoupom($xPosition = 18)
+    function setQRCodeCancelCoupon($xPosition = 18)
     {
         $qrCodeString = "{$this->idCanc}|{$this->ideCanc->dEmi}{$this->ideCanc->hEmi}|{$this->total->vCFe}|{$this->getNumDoc()}|{$this->ideCanc->assinaturaQRCODE}";
         $this->setQRCode($qrCodeString, $xPosition, $this->pdf->GetY() + 10);
@@ -313,12 +317,12 @@ class CfePdfGenerator
             $this->setContriberNotes();
             $this->setCFeId($this->id);
             $this->setBarcode($this->id);
-            $this->setQRCodeCoupom();
+            $this->setQRCodeCoupon();
             $this->setSATData();
         } else {
             $this->setHeaderCancelled();
-            $this->setCancelledCoupomData();
-            $this->setCancelCoupomData();
+            $this->setCancelledCouponData();
+            $this->setCancelCouponData();
         }
     }
 
