@@ -210,7 +210,7 @@ class CfePdfGenerator
     {
         $this->pdf->Ln();
         $this->pdf->SetFont($this->font, '', 6.5);
-        $formt = sprintf("%s %s %s %s %s %s %s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 18, 4), substr($id, 20, 4), substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
+        $formt = sprintf("%s %s %s %s %s %s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 20, 4), substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
         $this->pdf->Cell($this->pageWidth, 5, $formt, 0, 'C');
     }
 
