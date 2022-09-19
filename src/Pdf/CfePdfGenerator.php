@@ -49,7 +49,7 @@ class CfePdfGenerator
     function setCancelCoupon(XmlReader $xml)
     {
         //Check cancelled coupon id
-        if ($xml->getIdCanc() !== $this->id){
+        if ($xml->getIdCanc() !== $this->id) {
             throw new \Exception('A chave chCanc informada no XML de cancelamento deve ser identica a chave do documento cancelado');
         }
         $this->idCanc = $xml->getId();
@@ -115,11 +115,22 @@ class CfePdfGenerator
             $prod = $det->prod;
             $imposto = $det->imposto;
             $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round($prod->qCom, 3);
-            $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 27);
+            $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 25);
             $item = str_pad($index, 3, '0', STR_PAD_LEFT);
             $this->pdf->Cell(50, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
             $this->pdf->Cell(20, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
             $this->pdf->Ln();
+
+            if ($prod->vDesc > 0) {
+                $this->pdf->Cell(70, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
+                $this->pdf->Ln();
+            }
+
+            if ($prod->vOutro > 0) {
+                $this->pdf->Cell(70, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
+                $this->pdf->Ln();
+            }
+
             $index++;
         }
         $this->pdf->Ln();
@@ -127,6 +138,15 @@ class CfePdfGenerator
 
     function setTotals()
     {
+
+        if ($this->total->ICMSTot->vDesc > 0) {
+            $this->pdf->SetFont($this->font, 'B', 9);
+            $this->pdf->Cell(45, 3.5, 'Total de descontos');
+            $this->pdf->Cell(25, 3.5, $this->formatFloat($this->total->ICMSTot->vDesc), 0, 0, 'R');
+            $this->pdf->Ln();
+        }
+
+
         $this->pdf->SetFont($this->font, 'B', 12);
         $this->pdf->Cell(45, 5, 'TOTAL R$');
         $this->pdf->Cell(25, 5, $this->formatFloat($this->total->vCFe), 0, 0, 'R');
@@ -136,9 +156,9 @@ class CfePdfGenerator
     function setPayments()
     {
         $this->pdf->SetFont($this->font, '', 8);
-        foreach ($this->payments as $payment) {
-            $this->pdf->Cell(45, 5, PaymentTypes::byCode($payment->MP->cMP));
-            $this->pdf->Cell(25, 5, $this->formatFloat($payment->MP->vMP), 0, 0, 'R');
+        foreach ($this->payments->MP as $mp) {
+            $this->pdf->Cell(45, 5, PaymentTypes::byCode($mp->cMP));
+            $this->pdf->Cell(25, 5, $this->formatFloat($mp->vMP), 0, 0, 'R');
             $this->pdf->Ln();
         }
         if ($this->payments->vTroco > 0) {

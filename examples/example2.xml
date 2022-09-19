@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CFe>
+    <infCFe versaoDadosEnt="0.07" Id="CFe35220915423623000144590009635270000565674097" versao="0.07" versaoSB="010200">
+        <ide>
+            <cUF>35</cUF>
+            <cNF>567409</cNF>
+            <mod>59</mod>
+            <nserieSAT>000963527</nserieSAT>
+            <nCFe>000056</nCFe>
+            <dEmi>20220919</dEmi>
+            <hEmi>174052</hEmi>
+            <cDV>7</cDV>
+            <tpAmb>1</tpAmb>
+            <CNPJ>15423623000144</CNPJ>
+            <signAC>avKSojEGyCEOpcJq0sh18DHvFihi12nPnjT2JGoc6SgcuuiPr/4FvAqZTcEV8CpTp1Ji5/SfCaL4XhRovMjOeuqUhLUsu+3LHmxnySoFbeTckCyksGRKuFAU6z5BhOF/ZuT18r4a80ju3plXlSHzYO865x5/J16mDfvqA60FZkbmtXy83BBJ5wshb99LozJ9Lt7tiwJdhlF71sXf5qgfYsoS+pv3VxMPJ4Y9/tXY+BuAUkYFATneujsqFK3j6wXkC0WDafR85JOtcnYHL39Z0xN9Le8ZzhWOi8jvzIha16x0VHU6wLOHCY2MhpYRM215RoOQbmKf34Cb1vi/TaMKlw==</signAC>
+            <assinaturaQRCODE>Q52Wnyb/ZE5F4YL6q38U5meM5AxvQ4iTXuOlQM3tPW8KgB0qP2CVzC2Weaav/cujiSfOEqKpyvTh20SxreB0brh9R96PzauUTg0rPHhlTRYH66QXUlAedYXC+GXtpTEE47enPtvFlCynq6UV7qgFG7QnxDBFUr03hQoeHBS9enXslvwAzlefsicO9WbQUQb6han+K0bTSoBsZzYBba3kXhWnsCbqI6NVsc/m4LSRih0Dfe71hRRQGHEZA88KI/yIAhtC5eTXtXcJcFkPUTpx3p+ppa8K1Ox09hpax2KQAIq1Jgfbv9n2A/3+c2Q9FIk375v/cfOLkijx7prDfsn0ag==</assinaturaQRCODE>
+            <numeroCaixa>001</numeroCaixa>
+        </ide>
+        <emit>
+            <CNPJ>11111111111111</CNPJ>
+            <xNome>Estabelecimento de Teste 2</xNome>
+            <xFant>Estabelecimento Fantasia 2</xFant>
+            <enderEmit>
+                <xLgr>rua das flores</xLgr>
+                <nro>1005</nro>
+                <xCpl>frente</xCpl>
+                <xBairro>centro</xBairro>
+                <xMun>Sao Paulo</xMun>
+                <CEP>00000000</CEP>
+            </enderEmit>
+            <IE>111111111111</IE>
+            <cRegTrib>3</cRegTrib>
+            <indRatISSQN>S</indRatISSQN>
+        </emit>
+        <dest>
+            <xNome>VENDA A CONSUMIDOR</xNome>
+        </dest>
+        <det nItem="1">
+            <prod>
+                <cProd>1007</cProd>
+                <xProd>CIMENTO VOTORAN, TODAS AS OBRAS, 50 KG RETIRA</xProd>
+                <NCM>25232910</NCM>
+                <CFOP>5102</CFOP>
+                <uCom>SC</uCom>
+                <qCom>5.0000</qCom>
+                <vUnCom>28.00</vUnCom>
+                <vProd>140.00</vProd>
+                <indRegra>A</indRegra>
+                <vDesc>4.20</vDesc>
+                <vItem>135.80</vItem>
+            </prod>
+            <imposto>
+                <vItem12741>28.72</vItem12741>
+                <ICMS>
+                    <ICMSSN102>
+                        <Orig>0</Orig>
+                        <CSOSN>500</CSOSN>
+                    </ICMSSN102>
+                </ICMS>
+                <PIS>
+                    <PISSN>
+                        <CST>49</CST>
+                    </PISSN>
+                </PIS>
+                <COFINS>
+                    <COFINSSN>
+                        <CST>49</CST>
+                    </COFINSSN>
+                </COFINS>
+            </imposto>
+        </det>
+        <det nItem="2">
+            <prod>
+                <cProd>1025</cProd>
+                <xProd>FERRO 04,2 MM, 3/16, CA-60, 12 METROS, 1,308 KG</xProd>
+                <NCM>72142000</NCM>
+                <CFOP>5405</CFOP>
+                <uCom>BR</uCom>
+                <qCom>5.0000</qCom>
+                <vUnCom>9.14</vUnCom>
+                <vProd>45.70</vProd>
+                <indRegra>A</indRegra>
+                <vDesc>1.37</vDesc>
+                <vItem>44.33</vItem>
+            </prod>
+            <imposto>
+                <vItem12741>11.86</vItem12741>
+                <ICMS>
+                    <ICMSSN102>
+                        <Orig>0</Orig>
+                        <CSOSN>500</CSOSN>
+                    </ICMSSN102>
+                </ICMS>
+                <PIS>
+                    <PISSN>
+                        <CST>49</CST>
+                    </PISSN>
+                </PIS>
+                <COFINS>
+                    <COFINSSN>
+                        <CST>49</CST>
+                    </COFINSSN>
+                </COFINS>
+            </imposto>
+        </det>
+        <det nItem="3">
+            <prod>
+                <cProd>2049</cProd>
+                <xProd>BATE PORTA 1 X 1.1/8 BRANCO COM PARAFUSO</xProd>
+                <NCM>83026000</NCM>
+                <CFOP>5102</CFOP>
+                <uCom>CART</uCom>
+                <qCom>1.0000</qCom>
+                <vUnCom>6.07</vUnCom>
+                <vProd>6.07</vProd>
+                <indRegra>A</indRegra>
+                <vDesc>0.18</vDesc>
+                <vItem>5.89</vItem>
+            </prod>
+            <imposto>
+                <vItem12741>1.93</vItem12741>
+                <ICMS>
+                    <ICMSSN102>
+                        <Orig>0</Orig>
+                        <CSOSN>500</CSOSN>
+                    </ICMSSN102>
+                </ICMS>
+                <PIS>
+                    <PISSN>
+                        <CST>49</CST>
+                    </PISSN>
+                </PIS>
+                <COFINS>
+                    <COFINSSN>
+                        <CST>49</CST>
+                    </COFINSSN>
+                </COFINS>
+            </imposto>
+        </det>
+        <det nItem="4">
+            <prod>
+                <cProd>630284</cProd>
+                <xProd>KAPAZI TAPETE P/BOX TRANSPARENTE 61 X 36 CM</xProd>
+                <NCM>39181000</NCM>
+                <CFOP>5102</CFOP>
+                <uCom>PC</uCom>
+                <qCom>1.0000</qCom>
+                <vUnCom>23.38</vUnCom>
+                <vProd>23.38</vProd>
+                <indRegra>A</indRegra>
+                <vDesc>0.70</vDesc>
+                <vItem>22.68</vItem>
+            </prod>
+            <imposto>
+                <vItem12741>6.07</vItem12741>
+                <ICMS>
+                    <ICMSSN102>
+                        <Orig>0</Orig>
+                        <CSOSN>102</CSOSN>
+                    </ICMSSN102>
+                </ICMS>
+                <PIS>
+                    <PISSN>
+                        <CST>49</CST>
+                    </PISSN>
+                </PIS>
+                <COFINS>
+                    <COFINSSN>
+                        <CST>49</CST>
+                    </COFINSSN>
+                </COFINS>
+            </imposto>
+        </det>
+        <det nItem="5">
+            <prod>
+                <cProd>5631</cProd>
+                <xProd>FITA ISOLANTE, 3M IMPERIAL, VERMELHA, 18 MM, 10 METROS</xProd>
+                <NCM>39199020</NCM>
+                <CFOP>5102</CFOP>
+                <uCom>RL</uCom>
+                <qCom>1.0000</qCom>
+                <vUnCom>6.06</vUnCom>
+                <vProd>6.06</vProd>
+                <indRegra>A</indRegra>
+                <vDesc>0.18</vDesc>
+                <vItem>5.88</vItem>
+            </prod>
+            <imposto>
+                <vItem12741>1.89</vItem12741>
+                <ICMS>
+                    <ICMSSN102>
+                        <Orig>0</Orig>
+                        <CSOSN>102</CSOSN>
+                    </ICMSSN102>
+                </ICMS>
+                <PIS>
+                    <PISSN>
+                        <CST>49</CST>
+                    </PISSN>
+                </PIS>
+                <COFINS>
+                    <COFINSSN>
+                        <CST>49</CST>
+                    </COFINSSN>
+                </COFINS>
+            </imposto>
+        </det>
+        <total>
+            <ICMSTot>
+                <vICMS>0.00</vICMS>
+                <vProd>221.21</vProd>
+                <vDesc>6.63</vDesc>
+                <vPIS>0.00</vPIS>
+                <vCOFINS>0.00</vCOFINS>
+                <vPISST>0.00</vPISST>
+                <vCOFINSST>0.00</vCOFINSST>
+                <vOutro>0.00</vOutro>
+            </ICMSTot>
+            <vCFe>214.58</vCFe>
+            <vCFeLei12741>50.47</vCFeLei12741>
+        </total>
+        <pgto>
+            <MP>
+                <cMP>01</cMP>
+                <vMP>100.00</vMP>
+            </MP>
+            <MP>
+                <cMP>03</cMP>
+                <vMP>114.60</vMP>
+            </MP>
+            <vTroco>0.02</vTroco>
+        </pgto>
+        <infAdic>
+            <infCpl>Pedido: 1069230 Operador: caixa</infCpl>
+            <obsFisco xCampo="05.07.05.04">
+                <xTexto>Comete crime quem sonega</xTexto>
+            </obsFisco>
+        </infAdic>
+    </infCFe>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+            <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+            <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+            <Reference URI="#CFe35220915423623000144590009635270000565674097">
+                <Transforms>
+                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                    <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                </Transforms>
+                <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+                <DigestValue>p/8oCR8CEEZSnz0Cz1d/tNfusNqat2yJlA6RbBdTMV0=</DigestValue>
+            </Reference>
+        </SignedInfo>
+        <SignatureValue>kZ+94ilo28n4ZQ/ZghlC+3/wpPYkmULIF0QuMfLyA81uZ/xDh5rddbUNCi/4XFxWfdMY+paI30da/q+FGk/rI8UiIUeHGG2wrfijN4jtYnPANtAsfwLuAzQaell+9H75+E3QQ9/7Ng8wO8kKiiQ6KNKLFFe0+Q+sSndTupQB1ogUj65CkozbWpOziiAUBv50+ejVBwUai+0RzyLYMias4nobpcLfkn3O4ic63d/jwVu9S+w/ZFFT0L0A75oVAdr1KpoGyyaeLnQlRE66cvIHuzvqU8SxHphDVjVWAko3zU891v23EYJ8LzoNpRiG+W4iCGkbAR2gEBOnqRuHVrAjSg==</SignatureValue>
+        <KeyInfo>
+            <X509Data>
+                <X509Certificate>MIIGiTCCBHGgAwIBAgIJARe432AXhV0oMA0GCSqGSIb3DQEBCwUAMFExNTAzBgNVBAoTLFNlY3JldGFyaWEgZGEgRmF6ZW5kYSBkbyBFc3RhZG8gZGUgU2FvIFBhdWxvMRgwFgYDVQQDEw9BQyBTQVQgU0VGQVogU1AwHhcNMjAwODI3MTgyOTM5WhcNMjUwODI3MTgyOTM5WjCBwjESMBAGA1UEBRMJMDAwOTYzNTI3MQswCQYDVQQGEwJCUjESMBAGA1UECBMJc2FvIHBhdWxvMREwDwYDVQQKEwhTRUZBWi1TUDEPMA0GA1UECxMGQUMtU0FUMSgwJgYDVQQLEx9BdXRlbnRpY2FkbyBwb3IgQVIgU0VGQVogU1AgU0FUMT0wOwYDVQQDEzRBIEUgREUgQVNTSVMgVEVDTk9MT0dJQSBEQSBJTkZPUk1BQ0FPOjE1NDIzNjIzMDAwMTQ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqZVySV/XfAIY1XLrc3UJ3rirbuGKPd2qmY8KI5+56zyvg2BRgRQ3+xrUsQxNpcn0syDH2GYDZE7lBuuV/HeWee2R4s2ebR8oDMBhtxewRvPWaVE0wRDnw31Z0GA/VAgWA7s6X2o9Z/vmR7ktuaLlIkb88W+x1aSXsFdXc/FA7aJE3Zoiwg+dZji4XVYY5KLvXexrnydkf51gbqRjdI9MiLXGPnczTWQtzKKVb36dB9tosNGuMyBxTrMLA2azIPds/S2rg/nbPRh99gnlAZBeOlQB6v6e9mbQTbDeTJEgsfDygmbhvIm0nHqHPm4H9TrEwKU+U5ymkXUVdGe1pc7Q6wIDAQABo4IB8DCCAewwDgYDVR0PAQH/BAQDAgXgMHUGA1UdIARuMGwwagYJKwYBBAGB7C0DMF0wWwYIKwYBBQUHAgEWT2h0dHA6Ly9hY3NhdC5pbXByZW5zYW9maWNpYWwuY29tLmJyL3JlcG9zaXRvcmlvL2RwYy9hY3NlZmF6c3AvZHBjX2Fjc2VmYXpzcC5wZGYwZQYDVR0fBF4wXDBaoFigVoZUaHR0cDovL2Fjc2F0LmltcHJlbnNhb2ZpY2lhbC5jb20uYnIvcmVwb3NpdG9yaW8vbGNyL2Fjc2F0c2VmYXpzcC9hY3NhdHNlZmF6c3BjcmwuY3JsMIGUBggrBgEFBQcBAQSBhzCBhDAuBggrBgEFBQcwAYYiaHR0cDovL29jc3AuaW1wcmVuc2FvZmljaWFsLmNvbS5icjBSBggrBgEFBQcwAoZGaHR0cDovL2Fjc2F0LmltcHJlbnNhb2ZpY2lhbC5jb20uYnIvcmVwb3NpdG9yaW8vY2VydGlmaWNhZG9zL2Fjc2F0LnA3YzATBgNVHSUEDDAKBggrBgEFBQcDAjAJBgNVHRMEAjAAMCQGA1UdEQQdMBugGQYFYEwBAwOgEAQOMTU0MjM2MjMwMDAxNDQwHwYDVR0jBBgwFoAUsIWBsyjNdiopJEtfWEpvaNmssCowDQYJKoZIhvcNAQELBQADggIBAIE+Nf5SGbsB9B6d2bNKLIV+zyJcZUBoGHN/iZQtrtkN6r4A9ggJspYNtKQodU+aA0vBYP+9nTWwBTpu1X/xxBSyAhE1VrK4pchlMP7pQwKBzTYk9KOF6kJ5BADuXEyDERcOGpOt6z8sU4DFJR5XdlC6MPNZ61mxAJ01h318E5M4MAAwiYvIOaQf3g1dADYvhZVKLMckwnxRfgby6irzObe4JKYFOCsEdk2pWbkXfRT72JfD3wXAD/FA0TF+gZPBUlQ0DK40ceAtsO+aFtwgqiwLz/6YGwy4YQIjDwVZXMNhrTd8KpvTsS31KTu3Cjqmqk2OmEMHQ5R1iEi2ULX/Gdpoezfsulh5+hDuglZmRRyxjf4qVm8pLRjrUG24VgFqnT81q8hOLi/VFcQtpPwoQQtmgCL6owdN5lRrIKMQuFyffy1YErcRlUkyw3WcC6lANDBp673Rh3goS9bMBZOqPX1NIjCDJbQkp3IZODM6piTTRFwgcs/ly8N0W4z4jkyec2sQoc6cOs82gQPeMGcYLYBSf7nUB9Idgg3Y30g+Z1hOqadGBY7YIYgg3ik3PhPyq++gNjUUYLFSd7ZWw9TNkl7dUotKKxdz69w4vsDeoQegWIG6Ml/0sDxVZEaDc5L9slvp0Wk6phwRhHHwp930sESXLBPEBJlasLb4zHgNoHnd</X509Certificate>
+            </X509Data>
+        </KeyInfo>
+    </Signature>
+</CFe>

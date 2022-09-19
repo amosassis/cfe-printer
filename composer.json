@@ -17,7 +17,6 @@
         "phpunit/phpunit": "4.*"      
     },
     "require": {
-        "endroid/qrcode": "1.9.*",
         "tecnickcom/tcpdf": "^6.2"        
     },
     "autoload": {
