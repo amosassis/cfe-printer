@@ -118,16 +118,16 @@ class CfePdfGenerator
             $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 25);
             $item = str_pad($index, 3, '0', STR_PAD_LEFT);
             $this->pdf->Cell(50, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
-            $this->pdf->Cell(20, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
+            $this->pdf->Cell(0, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
             $this->pdf->Ln();
 
             if ($prod->vDesc > 0) {
-                $this->pdf->Cell(70, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
+                $this->pdf->Cell(0, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
                 $this->pdf->Ln();
             }
 
             if ($prod->vOutro > 0) {
-                $this->pdf->Cell(70, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
+                $this->pdf->Cell(0, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
                 $this->pdf->Ln();
             }
 
