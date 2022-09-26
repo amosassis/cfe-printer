@@ -67,7 +67,7 @@ class CfePdfGenerator
             'PZ' => 0,
         );
         $this->pdf->AddPage('P', $page_format, false, false);
-        $this->pdf->SetMargins(1, 1, 0, true);
+        $this->pdf->SetMargins(1, 1, 1, true);
         $this->pdf->SetY(2, true, true);
     }
 
@@ -108,26 +108,26 @@ class CfePdfGenerator
     function setProducts()
     {
         $this->pdf->SetFont($this->font, '', 7);
-        $this->pdf->Cell($this->pageWidth, 5, '#|COD|DESC|QTD|UN|VL UN R$|VL TR R$|VL ITEM R$');
+        $this->pdf->Cell($this->pageWidth, 5, '#    | COD | DESC | QTD | UN | VL UN R$ | VL TR R$ | VL ITEM R$');
         $this->setDividerLine();
         $index = 1;
         foreach ($this->det as $det) {
             $prod = $det->prod;
             $imposto = $det->imposto;
-            $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round($prod->qCom, 3);
+            $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round((int)$prod->qCom, 3);
             $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 25);
             $item = str_pad($index, 3, '0', STR_PAD_LEFT);
             $this->pdf->Cell(50, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
-            $this->pdf->Cell(20, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
+            $this->pdf->Cell(0, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
             $this->pdf->Ln();
 
             if ($prod->vDesc > 0) {
-                $this->pdf->Cell(70, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
+                $this->pdf->Cell(0, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
                 $this->pdf->Ln();
             }
 
             if ($prod->vOutro > 0) {
-                $this->pdf->Cell(70, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
+                $this->pdf->Cell(0, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
                 $this->pdf->Ln();
             }
 
@@ -142,14 +142,14 @@ class CfePdfGenerator
         if ($this->total->ICMSTot->vDesc > 0) {
             $this->pdf->SetFont($this->font, 'B', 9);
             $this->pdf->Cell(45, 3.5, 'Total de descontos');
-            $this->pdf->Cell(25, 3.5, $this->formatFloat($this->total->ICMSTot->vDesc), 0, 0, 'R');
+            $this->pdf->Cell(0, 3.5, $this->formatFloat($this->total->ICMSTot->vDesc), 0, 0, 'R');
             $this->pdf->Ln();
         }
 
 
         $this->pdf->SetFont($this->font, 'B', 12);
         $this->pdf->Cell(45, 5, 'TOTAL R$');
-        $this->pdf->Cell(25, 5, $this->formatFloat($this->total->vCFe), 0, 0, 'R');
+        $this->pdf->Cell(0, 5, $this->formatFloat($this->total->vCFe), 0, 0, 'R');
         $this->pdf->Ln();
     }
 
@@ -158,13 +158,13 @@ class CfePdfGenerator
         $this->pdf->SetFont($this->font, '', 8);
         foreach ($this->payments->MP as $mp) {
             $this->pdf->Cell(45, 5, PaymentTypes::byCode($mp->cMP));
-            $this->pdf->Cell(25, 5, $this->formatFloat($mp->vMP), 0, 0, 'R');
+            $this->pdf->Cell(0, 5, $this->formatFloat($mp->vMP), 0, 0, 'R');
             $this->pdf->Ln();
         }
         if ($this->payments->vTroco > 0) {
             $this->pdf->SetFont($this->font, '', 10);
             $this->pdf->Cell(45, 5, 'Troco R$');
-            $this->pdf->Cell(25, 5, $this->formatFloat($this->payments->vTroco), 0, 0, 'R');
+            $this->pdf->Cell(0, 5, $this->formatFloat($this->payments->vTroco), 0, 0, 'R');
             $this->pdf->Ln();
         }
     }
@@ -216,14 +216,17 @@ class CfePdfGenerator
 
     function setContriberNotes()
     {
+        $this->pdf->SetFont($this->font, '', 6);
+        $this->pdf->MultiCell(50, 1, 'Valor aprox. dos tributos deste cupom (conf. Lei Fed. 12.741/2012)', 0, 'L', 0, 0);
+        $this->pdf->MultiCell(0, 1, $this->formatFloat($this->total->vCFeLei12741), 0, 'R');
+        // $this->pdf->Ln();
         $this->pdf->SetFont($this->font, '', 8);
+        $this->setDividerLine();
         $this->pdf->Cell($this->pageWidth, 5, 'OBSERVAÇÕES DO CONTRIBUINTE');
         $this->pdf->Ln();
-        $this->pdf->Cell($this->pageWidth, 5, $this->infoAdd->infCpl);
-        $this->pdf->Ln();
-        $this->pdf->MultiCell(45, 5, 'Valor aproximado dos tributos deste cupom (Conforme Lei Fed. 12.741/2012)', 0, 'L', 0, 0);
-        $this->pdf->MultiCell(25, 5, $this->formatFloat($this->total->vCFeLei12741), 0, 'R');
-        $this->pdf->Ln();
+        // $this->pdf->Cell($this->pageWidth, 5, $this->infoAdd->infCpl);
+        $this->pdf->MultiCell(0, 5, $this->infoAdd->infCpl, 0, 'L', 0);
+        // $this->pdf->Ln();
     }
 
     function setCFeId($id)
@@ -231,7 +234,7 @@ class CfePdfGenerator
         $this->pdf->Ln();
         $this->pdf->SetFont($this->font, '', 6.5);
         $formt = sprintf("%s %s %s %s %s %s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 20, 4), substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
-        $this->pdf->Cell($this->pageWidth, 5, $formt, 0, 'C');
+        $this->pdf->Cell($this->pageWidth, 5, $formt, 0, 0, 'C');
     }
 
     function setBarcode($barcode)
@@ -253,7 +256,7 @@ class CfePdfGenerator
             'stretchtext' => 4
         );
         $this->pdf->Ln();
-        $this->pdf->write1DBarcode($barcode, 'C128C', 2, '', 70, 10, 0.4, $style, 'C');
+        $this->pdf->write1DBarcode($barcode, 'C128C', 2, '', $this->pageWidth, 10, 0.4, $style, 'C');
         $this->pdf->Ln();
     }
 
@@ -318,7 +321,7 @@ class CfePdfGenerator
     function setDividerLine()
     {
         $this->pdf->Ln();
-        $this->pdf->Line(2, $this->pdf->GetY(), $this->pageWidth, $this->pdf->GetY(), ['width' => 0.1, 'dash' => 3]);
+        $this->pdf->Line(0, $this->pdf->GetY(), $this->pdf->getPageWidth(), $this->pdf->GetY(), ['width' => 0.1, 'dash' => 3]);
     }
 
     function formatFloat($value, int $decimals = 2)
