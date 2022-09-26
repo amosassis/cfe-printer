@@ -1,4 +1,5 @@
 <?php
+
 namespace CfePrinter\Common;
 
 class PaymentTypes
@@ -13,6 +14,13 @@ class PaymentTypes
         '11' => 'Vale Refeição',
         '12' => 'Vale Presente',
         '13' => 'Vale Combustível',
+        '14' => 'Duplicata Mercantil',
+        '15' => 'Boleto Bancario',
+        '16' => 'Deposito Bancario',
+        '17' => 'Pagamento Instantaneo (PIX)',
+        '18' => 'Carteira Digital',
+        '19' => 'Fidelidade/Cashback/Credito Virtual',
+        '90' => 'Sem pagamento',
         '99' => 'Outros',
     ];
 

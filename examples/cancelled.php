@@ -1,5 +1,7 @@
 <?php
 
+ini_set("display_errors", 0);
+
 require_once '../vendor/autoload.php';
 
 use CfePrinter\Pdf\CfePdfGenerator;
