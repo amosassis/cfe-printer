@@ -114,7 +114,7 @@ class CfePdfGenerator
         foreach ($this->det as $det) {
             $prod = $det->prod;
             $imposto = $det->imposto;
-            $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round($prod->qCom, 3);
+            $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round((int)$prod->qCom, 3);
             $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 27);
             $item = str_pad($index, 3, '0', STR_PAD_LEFT);
             $this->pdf->Cell(50, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
