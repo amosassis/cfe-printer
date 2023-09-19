@@ -25,7 +25,7 @@ class CfePdfGenerator
     private $isCancelled = false;
     private $ideCanc;
 
-    function __construct(XmlReader $xml, $isCancelled = false, $pageWidth = 75, $font = 'helvetica')
+    function __construct(XmlReader $xml, $isCancelled = false, $pageWidth = 78, $font = 'helvetica')
     {
         $this->id = $xml->getId();
         $this->ide = $xml->getIde();
@@ -61,7 +61,7 @@ class CfePdfGenerator
     {
         $this->pdf->SetFont($this->font, '', 12);
         $page_format = array(
-            'MediaBox' => array('llx' => 0, 'lly' => 0, 'urx' => 1000, 'ury' => 80),
+            'MediaBox' => array('llx' => 0, 'lly' => 0, 'urx' => 1000, 'ury' => $this->pageWidth > 60 ? 80 : 57),
             'Dur' => 0,
             'Rotate' => 0,
             'PZ' => 0,
@@ -100,7 +100,7 @@ class CfePdfGenerator
         $this->pdf->Ln();
         $this->pdf->Cell($this->pageWidth, 5, "{$this->emit->enderEmit->xBairro} - {$this->emit->enderEmit->xMun}", 0, 0, 'C');
         $this->pdf->Ln();
-        $this->pdf->SetFont($this->font, '', 8.5);
+        $this->pdf->SetFont($this->font, '', 8);
         $this->pdf->Cell($this->pageWidth, 5, "CNPJ:{$this->emit->CNPJ} IE:{$this->emit->IE}", 0, 0, 'C');
         $this->pdf->Ln();
     }
@@ -108,26 +108,42 @@ class CfePdfGenerator
     function setProducts()
     {
         $this->pdf->SetFont($this->font, '', 7);
-        $this->pdf->Cell($this->pageWidth, 5, '#    | COD | DESC | QTD | UN | VL UN R$ | VL TR R$ | VL ITEM R$');
+
+        if ($this->pageWidth < 60) {
+            $productLabelsArray = explode('*', $this->getProductListLabels());
+            $this->pdf->Cell($this->pageWidth, 5, $productLabelsArray[0]);
+            $this->pdf->Ln();
+            $this->pdf->Cell($this->pageWidth, 5, $productLabelsArray[1]);
+        } else {
+            $this->pdf->Cell($this->pageWidth, 5, $this->getProductListLabels());
+        }
         $this->setDividerLine();
         $index = 1;
         foreach ($this->det as $det) {
             $prod = $det->prod;
             $imposto = $det->imposto;
             $qtd = (is_integer($prod->qCom)) ? round($prod->qCom, 0) : round((int)$prod->qCom, 3);
-            $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, 25);
+            $prodDescription = substr("{$prod->cProd} {$prod->xProd}", 0, $this->pageWidth > 60 ? 25 : 33);
             $item = str_pad($index, 3, '0', STR_PAD_LEFT);
-            $this->pdf->Cell(50, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
-            $this->pdf->Cell(0, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
+            if ($this->pageWidth < 60) {
+                $this->pdf->Cell($this->pageWidth, 3.5, "{$item} {$prodDescription}");
+                $this->pdf->Ln();
+                $this->pdf->Cell($this->pageWidth * 0.7, 3.5, "{$qtd} {$prod->uCom} X {$prod->vUnCom}");
+                $this->pdf->Cell($this->pageWidth * 0.3, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
+            } else {
+                $this->pdf->Cell($this->pageWidth * 0.7, 3.5, "{$item} {$prodDescription} {$qtd} {$prod->uCom} X {$prod->vUnCom}");
+                $this->pdf->Cell($this->pageWidth * 0.3, 3.5, $this->formatFloat($prod->vItem), 0, 0, 'R');
+            }
+
             $this->pdf->Ln();
 
             if ($prod->vDesc > 0) {
-                $this->pdf->Cell(0, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
+                $this->pdf->Cell($this->pageWidth, 3.5, "Desconto no item: " . $this->formatFloat($prod->vDesc), 0, 0, 'R');
                 $this->pdf->Ln();
             }
 
             if ($prod->vOutro > 0) {
-                $this->pdf->Cell(0, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
+                $this->pdf->Cell($this->pageWidth, 3.5, "Acrescimo no item: " . $this->formatFloat($prod->vOutro), 0, 0, 'R');
                 $this->pdf->Ln();
             }
 
@@ -136,20 +152,30 @@ class CfePdfGenerator
         $this->pdf->Ln();
     }
 
+    private function getProductListLabels()
+    {
+        if ($this->pageWidth >= 75) {
+            return '#    | COD | DESC | QTD | UN | VL UN R$ | VL TR R$ | VL ITEM R$';
+        }
+        if ($this->pageWidth <= 60) {
+            return '#    | COD | DESC |*QTD | UN | VL UN R$ | VL TR R$ | VL ITEM R$';
+        }
+        return '#    |COD |DESC |QTD |UN |VL.UN R$ |VL.TR R$ |VL.ITEM R$';
+    }
+
     function setTotals()
     {
-
         if ($this->total->ICMSTot->vDesc > 0) {
             $this->pdf->SetFont($this->font, 'B', 9);
-            $this->pdf->Cell(45, 3.5, 'Total de descontos');
-            $this->pdf->Cell(0, 3.5, $this->formatFloat($this->total->ICMSTot->vDesc), 0, 0, 'R');
+            $this->pdf->Cell($this->pageWidth * 0.6, 3.5, 'Total de descontos');
+            $this->pdf->Cell($this->pageWidth * 0.4, 3.5, $this->formatFloat($this->total->ICMSTot->vDesc), 0, 0, 'R');
             $this->pdf->Ln();
         }
 
 
         $this->pdf->SetFont($this->font, 'B', 12);
-        $this->pdf->Cell(45, 5, 'TOTAL R$');
-        $this->pdf->Cell(0, 5, $this->formatFloat($this->total->vCFe), 0, 0, 'R');
+        $this->pdf->Cell($this->pageWidth * 0.6, 5, 'TOTAL R$');
+        $this->pdf->Cell($this->pageWidth * 0.4, 5, $this->formatFloat($this->total->vCFe), 0, 0, 'R');
         $this->pdf->Ln();
     }
 
@@ -157,14 +183,14 @@ class CfePdfGenerator
     {
         $this->pdf->SetFont($this->font, '', 8);
         foreach ($this->payments->MP as $mp) {
-            $this->pdf->Cell(45, 5, PaymentTypes::byCode($mp->cMP));
-            $this->pdf->Cell(0, 5, $this->formatFloat($mp->vMP), 0, 0, 'R');
+            $this->pdf->Cell($this->pageWidth * 0.6, 5, PaymentTypes::byCode($mp->cMP));
+            $this->pdf->Cell($this->pageWidth * 0.4, 5, $this->formatFloat($mp->vMP), 0, 0, 'R');
             $this->pdf->Ln();
         }
         if ($this->payments->vTroco > 0) {
             $this->pdf->SetFont($this->font, '', 10);
-            $this->pdf->Cell(45, 5, 'Troco R$');
-            $this->pdf->Cell(0, 5, $this->formatFloat($this->payments->vTroco), 0, 0, 'R');
+            $this->pdf->Cell($this->pageWidth * 0.6, 5, 'Troco R$');
+            $this->pdf->Cell($this->pageWidth * 0.4, 5, $this->formatFloat($this->payments->vTroco), 0, 0, 'R');
             $this->pdf->Ln();
         }
     }
@@ -217,8 +243,8 @@ class CfePdfGenerator
     function setContriberNotes()
     {
         $this->pdf->SetFont($this->font, '', 6);
-        $this->pdf->MultiCell(50, 1, 'Valor aprox. dos tributos deste cupom (conf. Lei Fed. 12.741/2012)', 0, 'L', 0, 0);
-        $this->pdf->MultiCell(0, 1, $this->formatFloat($this->total->vCFeLei12741), 0, 'R');
+        $this->pdf->MultiCell($this->pageWidth * 0.7, 1, 'Valor aprox. dos tributos deste cupom (conf. Lei Fed. 12.741/2012)', 0, 'L', 0, 0);
+        $this->pdf->MultiCell($this->pageWidth * 0.3, 1, $this->formatFloat($this->total->vCFeLei12741), 0, 'R');
         // $this->pdf->Ln();
         $this->pdf->SetFont($this->font, '', 8);
         $this->setDividerLine();
@@ -233,8 +259,16 @@ class CfePdfGenerator
     {
         $this->pdf->Ln();
         $this->pdf->SetFont($this->font, '', 6.5);
-        $formt = sprintf("%s %s %s %s %s %s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 20, 4), substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
-        $this->pdf->Cell($this->pageWidth, 5, $formt, 0, 0, 'C');
+        if ($this->pageWidth < 60) {
+            $formt1 = sprintf("%s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 20, 4));
+            $formt2 = sprintf("%s %s %s %s %s", substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
+            $this->pdf->Cell($this->pageWidth, 5, $formt1, 0, 0, 'C');
+            $this->pdf->Ln();
+            $this->pdf->Cell($this->pageWidth, 5, $formt2, 0, 0, 'C');
+        } else {
+            $formt = sprintf("%s %s %s %s %s %s %s %s %s %s %s", substr($id, 0, 4), substr($id, 4, 4), substr($id, 8, 4), substr($id, 12, 4), substr($id, 16, 4), substr($id, 20, 4), substr($id, 24, 4), substr($id, 28, 4), substr($id, 32, 4), substr($id, 36, 4), substr($id, 40, 4));
+            $this->pdf->Cell($this->pageWidth, 5, $formt, 0, 0, 'C');
+        }
     }
 
     function setBarcode($barcode)
@@ -298,6 +332,12 @@ class CfePdfGenerator
     {
         $yValue = $this->pdf->GetY() - 37;
         $xValue = 40;
+
+        if ($this->pageWidth < 60) {
+            $yValue = $this->pdf->GetY() + 5;
+            $xValue = 2;
+        }
+
         $this->pdf->Text($xValue, $yValue, 'Consumidor');
         $yValue += 3.5;
         $this->pdf->Text($xValue, $yValue, $this->dest->xNome);
@@ -313,8 +353,12 @@ class CfePdfGenerator
         $hEmi = \DateTime::createFromFormat("His", $this->ide->hEmi);
         $this->pdf->Text($xValue, $yValue, "{$dtEmi->format("d/m/Y")} {$hEmi->format("H:i:s")}");
         $this->pdf->SetY($this->pdf->GetY() + 6);
-        $this->pdf->Cell(38, 5, '');
-        $this->pdf->MultiCell(35, 5, 'Consulte o QRCode pelo aplicativo "De olho na nota", disponível na AppStore (Apple) e PlayStore (Android)', 0, 'C', 0);
+        if ($this->pageWidth < 60) {
+            $this->pdf->MultiCell($this->pageWidth, 5, 'Consulte o QRCode pelo aplicativo "De olho na nota", disponível na AppStore (Apple) e PlayStore (Android)', 0, 'C', 0);
+        } else {
+            $this->pdf->Cell(38, 5, '');
+            $this->pdf->MultiCell(35, 5, 'Consulte o QRCode pelo aplicativo "De olho na nota", disponível na AppStore (Apple) e PlayStore (Android)', 0, 'C', 0);
+        }
     }
 
 
